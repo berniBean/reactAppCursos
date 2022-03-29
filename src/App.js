@@ -12,8 +12,8 @@ function App() {
 
   return (
     <MuiThemeProvider theme ={theme}>
-      <Login/>
-      <PerfilUsuario/>
+      <RegistrarUsuario/>
+      
 
     </MuiThemeProvider>
 

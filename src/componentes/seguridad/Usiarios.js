@@ -9,8 +9,36 @@ import {
 import React from "react";
 import style from "../Tool/Style";
 import PersonIcon from "@material-ui/icons/Person";
+import { useState } from "react";
+import { useEffect } from "react";
+import { obtenerUsuarioActual } from "../../Actions/UsuarioAction";
+
 
 const PerfilUsuario = () => {
+
+  const [ usuario, setUsuario] = useState({
+    NombreCompleto : '',
+    Email : '',
+    Password : '',
+    ConfirmarPassword : '',
+    Username: ''
+  })
+
+  const ingresarValoresMemoria = e =>{
+    const {name,value} = e.target;
+    setUsuario(anterio => ({
+      ...anterio,
+      [name] : value
+    }))
+  }
+
+  useEffect(()=> {
+    obtenerUsuarioActual()
+    .then(response =>{
+      console.log(response)
+    })
+  },[])
+
   return (
     <Container componet="main" maxWidth="md" justify="center">
       <div style={style.paper}>
@@ -22,9 +50,11 @@ const PerfilUsuario = () => {
         </Typography>
         <form style={style.form}>
           <Grid container spacing={2}>
-            <Grid item xs={12} md={6}>
+            <Grid item xs={12} md={12}>
               <TextField
-                name="nombre"
+                name="NombreCompleto"
+                value = {usuario.NombreCompleto}
+                onChange={ingresarValoresMemoria}
                 variant="outlined"
                 fullWidth
                 label="Ingrese su nombre completo"
@@ -33,7 +63,21 @@ const PerfilUsuario = () => {
 
             <Grid item xs={12} md={6}>
               <TextField
-                name="email"
+                name="Username"
+                value = {usuario.Username}
+                onChange={ingresarValoresMemoria}
+                type="email"
+                variant="outlined"
+                fullWidth
+                label="Ingrese su Nombre de usuario"
+              />
+            </Grid>            
+
+            <Grid item xs={12} md={6}>
+              <TextField
+                name="Email"
+                value = {usuario.Email}
+                onChange={ingresarValoresMemoria}
                 type="email"
                 variant="outlined"
                 fullWidth
@@ -43,7 +87,9 @@ const PerfilUsuario = () => {
 
             <Grid item xs={12} md={6}>
               <TextField
-                name="password"
+                name="Password"
+                value = {usuario.Password}
+                onChange={ingresarValoresMemoria}
                 type="password"
                 variant="outlined"
                 fullWidth
@@ -52,7 +98,9 @@ const PerfilUsuario = () => {
             </Grid>
             <Grid item xs={12} md={6}>
               <TextField
-                name="password"
+                name="ConfirmarPassword"
+                value = {usuario.ConfirmarPassword}
+                onChange={ingresarValoresMemoria}
                 type="password"
                 variant="outlined"
                 fullWidth
