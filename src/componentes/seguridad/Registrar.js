@@ -23,7 +23,7 @@ const RegistrarUsuario =() =>{
         }))
     }
 
-    const NuevoUsuario = e => {
+    const NuevoUsuarioBoton = e => {
         e.preventDefault();
         registraUsuario(usuario)
         .then(response => {
@@ -109,7 +109,7 @@ const RegistrarUsuario =() =>{
                     <Grid container justify="center">
                         <Grid item xs ={12} md={6}>
                             <Button type="submit" 
-                                onClick = {NuevoUsuario}
+                                onClick = {NuevoUsuarioBoton}
                                 fullWidth variant="contained" 
                                 color="primary" 
                                 size="large" 

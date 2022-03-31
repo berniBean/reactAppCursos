@@ -3,10 +3,11 @@ import axios from "axios";
 axios.defaults.baseURL ='http://localhost:5174/api'
 axios.interceptors.request.use((config) => 
 {
-    const token_seguridad = window.localStorage.getItem('token_seguridad');
+    const token_seguridad = window.localStorage.getItem('token_seguridad')
+    
     if(token_seguridad)
     {
-        config.headers.Auhorization = 'Bearer ' +token_seguridad
+        config.headers.Authorization = 'Bearer ' + token_seguridad;
         return config
     }
 
@@ -14,6 +15,8 @@ axios.interceptors.request.use((config) =>
 },error => {
     return Promise.reject(error)
 })
+
+
 const requestGenerico = {
     get : (url) => axios.get(url),
     post : (url,body) => axios.post(url,body),
